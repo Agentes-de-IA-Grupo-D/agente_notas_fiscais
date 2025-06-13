@@ -4,3 +4,4 @@ langchain-community
 openai
 pandas
 groq
+langchain-experimental
