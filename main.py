@@ -35,6 +35,18 @@ if uploaded_files:
             allow_dangerous_code=True,
             max_iterations=50
         )
+
+        def mensagem_erro_amigavel(e):
+            erro = str(e).lower()
+            if "rate limit" in erro or "rate_limit" in erro:
+                return "Você fez muitas perguntas em pouco tempo e atingiu o limite da API. Por favor, aguarde alguns segundos e tente novamente."
+            elif "not found" in erro or "no such file" in erro:
+                return "O arquivo de dados não foi encontrado. Verifique se o arquivo CSV está correto e foi enviado."
+            elif "empty" in erro or "dataframe" in erro:
+                return "A planilha está vazia ou não foi carregada corretamente. Envie um arquivo CSV válido."
+            else:
+                return f"Não foi possível responder à sua pergunta. Motivo técnico: {e}"
+
         try:
             resposta = agent.run(pergunta_com_contexto)
             if not resposta or resposta.strip() == "":
@@ -42,12 +54,6 @@ if uploaded_files:
             else:
                 st.write(resposta)
         except Exception as e:
-            st.error(
-                "Não foi possível responder à sua pergunta. "
-                "Isso pode acontecer se a informação não estiver presente na planilha, "
-                "se a pergunta exigir um cálculo impossível com os dados fornecidos, "
-                "ou se a pergunta estiver fora do contexto dos dados. "
-                f"Detalhes técnicos: {e}"
-            )
+            st.error(mensagem_erro_amigavel(e))
 else:
     st.info("Envie pelo menos um arquivo CSV para começar.")
