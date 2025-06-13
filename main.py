@@ -35,7 +35,19 @@ if uploaded_files:
             allow_dangerous_code=True,
             max_iterations=50
         )
-        resposta = agent.run(pergunta_com_contexto)
-        st.write("Resposta:", resposta)
+        try:
+            resposta = agent.run(pergunta_com_contexto)
+            if not resposta or resposta.strip() == "":
+                st.warning("Não foi possível encontrar uma resposta para sua pergunta com os dados fornecidos. Verifique se a informação está presente na planilha.")
+            else:
+                st.write(resposta)
+        except Exception as e:
+            st.error(
+                "Não foi possível responder à sua pergunta. "
+                "Isso pode acontecer se a informação não estiver presente na planilha, "
+                "se a pergunta exigir um cálculo impossível com os dados fornecidos, "
+                "ou se a pergunta estiver fora do contexto dos dados. "
+                f"Detalhes técnicos: {e}"
+            )
 else:
     st.info("Envie pelo menos um arquivo CSV para começar.")
