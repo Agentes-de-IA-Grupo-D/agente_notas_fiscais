@@ -66,8 +66,7 @@ coverage.xml
 *.env
 
 # PDF/Markdown reports
-*.pdf
-*.md
+
 
 # Streamlit
 .streamlit/
@@ -80,8 +79,3 @@ Thumbs.db
 *.log
 
 # Ignore report and temp files
-Grupo_D_Relatorio_Final.pdf
-Grupo_D_Relatorio_Final.md
-gerar_pdf.py
-INSTRUCOES_PDF.md
-RESUMO_EXECUTIVO.md 
