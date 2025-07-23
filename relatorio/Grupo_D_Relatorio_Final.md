@@ -224,5 +224,5 @@ O projeto atende aos objetivos propostos pelo curso, demonstrando competência n
 
 ## Integrantes do Grupo
 
-- **Thalissa Kezia
-- **Joney Sousa
+- Thalissa Kezia
+- Joney Sousa
